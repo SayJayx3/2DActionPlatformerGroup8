@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8567771420016987827}
   - component: {fileID: 3335416531997627853}
   - component: {fileID: -8867065513918100529}
-  - component: {fileID: 8693181085799039800}
+  - component: {fileID: 8002385249362521909}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -150,13 +150,13 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.49999997
---- !u!114 &8693181085799039800
+--- !u!114 &8002385249362521909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +165,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4013995474799475698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f39c7419eeadc0e41a04b5fd62e8ba8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fed6ef7682ed54459f08bee06728dfe, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletScript
-  bulletSpeed: 10
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  force: 3
+  collisionDetected: 0
