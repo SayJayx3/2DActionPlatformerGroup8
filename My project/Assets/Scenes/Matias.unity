@@ -198,9 +198,9 @@ GameObject:
   - component: {fileID: 552728614}
   - component: {fileID: 552728616}
   - component: {fileID: 552728615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,6 +277,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1645839385}
+  - {fileID: 1040986655}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &552728614
@@ -352,9 +353,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &672613711
 GameObject:
@@ -561,7 +562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 907068482}
   - component: {fileID: 907068483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,6 +642,89 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1040986654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1040986655}
+  - component: {fileID: 1040986656}
+  - component: {fileID: 1040986657}
+  m_Layer: 0
+  m_Name: BulletCasingDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1040986655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040986654}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.006, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 552728613}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1040986656
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040986654}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.0000000397789, y: -0.33368963}
+  m_Size: {x: 1.0000001, y: 0.3326232}
+  m_Direction: 1
+--- !u!114 &1040986657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040986654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b935b0f9a51cc34980ac2aaa3aacc80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletCasing
+  forceAmount: 40
 --- !u!1 &1090595660
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +848,7 @@ GameObject:
   - component: {fileID: 1601409742}
   - component: {fileID: 1601409741}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: BulletCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -898,7 +982,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1645839385}
   - component: {fileID: 1645839386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RotationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -933,12 +1017,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fae54e46d066d449b3f468887bff50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  bulletCasing: {fileID: 285486346115979756, guid: 99aeddddcee90504aa62834e5affac6f, type: 3}
   bullet: {fileID: 4013995474799475698, guid: 2c026e9b9a0bf5648916563650efe15b, type: 3}
   bulletTransform: {fileID: 907068482}
   canFire: 1
   timeBetweenFiring: 0.5
-  bulletsInsideCasing: 0
-  startingMagazine: 0
+  bulletsInsideMagazine: 30
+  startingMagazine: 30
+  bulletText: {fileID: 1601409741}
 --- !u!1 &1788966367
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +1036,7 @@ GameObject:
   - component: {fileID: 1788966369}
   - component: {fileID: 1788966368}
   - component: {fileID: 1788966370}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Ground
   m_Icon: {fileID: 0}
