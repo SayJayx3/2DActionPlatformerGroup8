@@ -11,6 +11,7 @@ public class Shooting : MonoBehaviour
     private bool reloadNeccesary;
     private float reloadTimer;
 
+
     public GameObject bulletCasing;
     public GameObject bullet;
     public Transform bulletTransform;

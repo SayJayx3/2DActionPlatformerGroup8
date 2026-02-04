@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     public bool collisionDetected;
     private ParticleSystem particleUsage;
     private ParticleSystem theInstParticle;
-
+    private float destroyThisObject;
 
     void Start()
     {
@@ -26,6 +26,11 @@ public class Bullet : MonoBehaviour
 
         ParticleSystem particle = GameObject.FindGameObjectWithTag("BulletParticle").GetComponent<ParticleSystem>();
         particleUsage = particle;
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
