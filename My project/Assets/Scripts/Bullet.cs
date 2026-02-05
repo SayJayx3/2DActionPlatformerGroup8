@@ -9,7 +9,9 @@ public class Bullet : MonoBehaviour
     public bool collisionDetected;
     private ParticleSystem particleUsage;
     private ParticleSystem theInstParticle;
-    private float destroyThisObject;
+   
+
+    public float timer;
 
     void Start()
     {
@@ -30,7 +32,12 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        
+        timer += Time.deltaTime;
+
+        if(timer > 5f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

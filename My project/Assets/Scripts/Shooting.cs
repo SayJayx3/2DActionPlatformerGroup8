@@ -10,8 +10,11 @@ public class Shooting : MonoBehaviour
     private float timer;
     private bool reloadNeccesary;
     private float reloadTimer;
+    private bool reloading;
+    private bool isFiring;
+    private int randomNumber;
 
-
+    public float amoutOfTimeNeccesaryToReload;
     public GameObject bulletCasing;
     public GameObject bullet;
     public Transform bulletTransform;
@@ -20,16 +23,19 @@ public class Shooting : MonoBehaviour
     public int bulletsInsideMagazine;
     public int startingMagazine;
     [SerializeField] TextMeshProUGUI bulletText;
+    Animator animator;
 
     private void Awake()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        animator = GetComponentInChildren<Animator>();
         bulletsInsideMagazine = startingMagazine;
     }
 
     private void Update()
     {
         Shoot();
+        randomNumber = Random.Range(-10, 5);
     }
 
     void Shoot()
@@ -42,7 +48,7 @@ public class Shooting : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
-        bulletText.text = "Mag;" + bulletsInsideMagazine.ToString();
+        bulletText.text = ":" + bulletsInsideMagazine.ToString();
 
         if (!canFire)
         {
@@ -56,24 +62,45 @@ public class Shooting : MonoBehaviour
 
 
 
-        if (Input.GetMouseButton(0) && canFire && reloadNeccesary == false)
+        if (Input.GetMouseButton(0) && canFire && reloadNeccesary == false && reloading == false)
         {
             canFire = false;
+            isFiring = true;
             bulletsInsideMagazine -= 1;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
-            Instantiate(bulletCasing, bulletTransform.position, Quaternion.identity);
+
+            var bulletCasingInstantiation = Instantiate(bulletCasing, bulletTransform.position, Quaternion.identity);
+           Rigidbody2D bulletCasingRigidbody2d = bulletCasingInstantiation.GetComponent<Rigidbody2D>();
+            bulletCasingRigidbody2d.AddForce(transform.up * randomNumber, ForceMode2D.Impulse);
+            bulletCasingRigidbody2d.AddForce(transform.right * randomNumber, ForceMode2D.Impulse);
+
+            animator.Play("muzzleflash");
+        }
+
+        else if (Input.GetMouseButtonUp(0))
+        {
+            animator.Play("New State");
+            isFiring = false;
         }
 
         if (bulletsInsideMagazine <= 0)
         {
             reloadNeccesary = true;
+            canFire = false;
+            animator.Play("New State");
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && reloadTimer > 3f)
+        if (Input.GetKeyDown(KeyCode.R) && reloadTimer > amoutOfTimeNeccesaryToReload && isFiring == false && bulletsInsideMagazine < 30)
         {
             bulletsInsideMagazine = startingMagazine;
             reloadNeccesary = false;
             reloadTimer = 0;
+            reloading = true;
+        }
+
+        if (reloadTimer > amoutOfTimeNeccesaryToReload)
+        {
+            reloading = false;  
         }
 
         reloadTimer += Time.deltaTime;
