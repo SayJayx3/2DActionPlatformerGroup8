@@ -9,8 +9,8 @@ public class Bullet : MonoBehaviour
     public bool collisionDetected;
     private ParticleSystem particleUsage;
     private ParticleSystem theInstParticle;
-   
 
+    public int Damage;
     public float timer;
 
     void Start()

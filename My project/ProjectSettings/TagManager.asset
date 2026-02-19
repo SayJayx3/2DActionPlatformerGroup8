@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - BulletParticle
   - BulletCasing
+  - CinemachineCamera
+  - Bullet
+  - SceneManager
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -43,6 +47,30 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Hole1
+    uniqueID: 2347146067
+    locked: 0
+  - name: Hole2
+    uniqueID: 1119313189
+    locked: 0
+  - name: Cave1
+    uniqueID: 4018683769
+    locked: 0
+  - name: CaveSpikes
+    uniqueID: 3009106291
+    locked: 0
+  - name: Cave2
+    uniqueID: 523942335
+    locked: 0
+  - name: Enviroment
+    uniqueID: 3099766699
+    locked: 0
+  - name: Player
+    uniqueID: 470184125
+    locked: 0
+  - name: Enemy
+    uniqueID: 700234197
     locked: 0
   m_RenderingLayers:
   - Default

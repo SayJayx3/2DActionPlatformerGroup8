@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using Unity.Cinemachine;
 
 public class Shooting : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Shooting : MonoBehaviour
     private bool isFiring;
     private int randomNumber;
 
+    [SerializeField] Animator smokeEffect;
     public float amoutOfTimeNeccesaryToReload;
     public GameObject bulletCasing;
     public GameObject bullet;
@@ -24,10 +26,13 @@ public class Shooting : MonoBehaviour
     public int startingMagazine;
     [SerializeField] TextMeshProUGUI bulletText;
     Animator animator;
+    Animator cameraShakeAnimation;
+
 
     private void Awake()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cameraShakeAnimation = GameObject.FindGameObjectWithTag("CinemachineCamera").GetComponent<Animator>();
         animator = GetComponentInChildren<Animator>();
         bulletsInsideMagazine = startingMagazine;
     }
@@ -61,25 +66,29 @@ public class Shooting : MonoBehaviour
         }
 
 
-
         if (Input.GetMouseButton(0) && canFire && reloadNeccesary == false && reloading == false)
         {
             canFire = false;
             isFiring = true;
             bulletsInsideMagazine -= 1;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+            
 
             var bulletCasingInstantiation = Instantiate(bulletCasing, bulletTransform.position, Quaternion.identity);
            Rigidbody2D bulletCasingRigidbody2d = bulletCasingInstantiation.GetComponent<Rigidbody2D>();
             bulletCasingRigidbody2d.AddForce(transform.up * randomNumber, ForceMode2D.Impulse);
             bulletCasingRigidbody2d.AddForce(transform.right * randomNumber, ForceMode2D.Impulse);
 
+            cameraShakeAnimation.Play("CameraShake");
+            smokeEffect.Play("SmokeAnimation");
             animator.Play("muzzleflash");
         }
 
         else if (Input.GetMouseButtonUp(0))
         {
             animator.Play("New State");
+            smokeEffect.Play("SmokeAnimation");
+            cameraShakeAnimation.Play("New State");
             isFiring = false;
         }
 
@@ -88,9 +97,11 @@ public class Shooting : MonoBehaviour
             reloadNeccesary = true;
             canFire = false;
             animator.Play("New State");
+            cameraShakeAnimation.Play("New State");
+            smokeEffect.Play("New State");
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && reloadTimer > amoutOfTimeNeccesaryToReload && isFiring == false && bulletsInsideMagazine < 30)
+        if (Input.GetKeyDown(KeyCode.R) && reloadTimer > amoutOfTimeNeccesaryToReload && isFiring == false && bulletsInsideMagazine < startingMagazine)
         {
             bulletsInsideMagazine = startingMagazine;
             reloadNeccesary = false;
